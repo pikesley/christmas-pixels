@@ -1,0 +1,11 @@
+adafruit-circuitpython-neopixel
+coverage
+flask
+mock
+pylama
+pylama-pylint
+pytest
+pytest-cov
+pytest-random-order
+
+ipdb
