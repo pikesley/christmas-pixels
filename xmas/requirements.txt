@@ -1,11 +1,12 @@
 adafruit-circuitpython-neopixel
 coverage
-flask
+fastapi
 mock
 pylama
 pylama-pylint
 pytest
 pytest-cov
 pytest-random-order
-
-ipdb
+requests
+starlette==0.12.9
+uvicorn

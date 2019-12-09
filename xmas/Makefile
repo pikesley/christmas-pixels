@@ -33,3 +33,6 @@ systemd-install:
 stop-services:
 	sudo service apiserver stop
 	sudo service chaser stop
+
+run-server:
+	sudo uvicorn apiserver:app --host 0.0.0.0 --port 5000 --reload
