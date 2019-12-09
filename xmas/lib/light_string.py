@@ -12,7 +12,7 @@ class LightString:
     """Wrapper around the neopixel string."""
 
     def __init__(self, length):
-        """Constructor."""
+        """Construct."""
         self.length = length
         if 'arm' in platform.platform():
             self.pixels = NeoPixel(board.D18, self.length)  # nocov
@@ -64,7 +64,7 @@ class FakePixel(list):
     """Fake NeoPixels for testing."""
 
     def __init__(self, length):  # pylint: disable=W0231
-        """Constructor."""
+        """Construct."""
         self.length = length
         for i in range(self.length):  # pylint: disable=W0612
             self.append((0, 0, 0))
