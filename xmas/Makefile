@@ -25,3 +25,11 @@ install:
 clean:
 	@find . -depth -name __pycache__ -exec rm -fr {} \;
 	@find . -depth -name .pytest_cache -exec rm -fr {} \;
+
+systemd-install:
+	sudo systemctl enable /home/pi/xmas/systemd/apiserver.service
+	sudo systemctl enable /home/pi/xmas/systemd/chaser.service
+
+stop-services:
+	sudo service apiserver stop
+	sudo service chaser stop
