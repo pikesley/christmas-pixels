@@ -23,3 +23,6 @@ stop-services:
 
 run-server:
 	sudo uvicorn apiserver:app --host 0.0.0.0 --port 5000 --reload
+
+push-code:
+	rsync -av /opt/xmas pi@xmas.local:
