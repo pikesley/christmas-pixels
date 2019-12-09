@@ -6,19 +6,6 @@ style:
 test:
 	python -m pytest --random-order --cov -vv -s
 
-test-style:
-	python -m pylama
-
-test-unit:
-	python -m pytest --verbose --random-order -k unit_
-
-test-system:
-	python -m pytest --verbose --random-order -k system_
-
-test-coverage:
-	@python -m pytest -q --cov > /dev/null
-	python -m coverage report
-
 install:
 	python -m pip install -r requirements.txt
 
