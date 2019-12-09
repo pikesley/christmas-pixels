@@ -17,16 +17,21 @@ class LightString:
         if 'arm' in platform.platform():
             self.pixels = NeoPixel(board.D18, self.length)  # nocov
         else:
-            self.pixels = MagicMock()
+            self.pixels = FakePixel(self.length)
 
-    def light_one(self, colour, index):
+    def light_one(self, index, colour):
         """Light up a single pixel."""
-        self.pixels[index] = self.lookup(colour)
+        # this needs to possibly return bad index + bad colour in the exception
+        try:
+            self.pixels[index] = self.lookup(colour)
+        except IndexError:
+            raise LightStringException(f"Invalid index {index}")
 
     def light_many(self, colours):
         """Apply an array of GRB colours to the pixels."""
         for index, colour in enumerate(colours):
-            self.pixels[index] = self.lookup(colour)
+            if index < self.length:
+                self.pixels[index] = self.lookup(colour)
 
     def light_all(self, colour):
         """Light up all the pixels."""
@@ -45,4 +50,22 @@ class LightString:
             "white": [255, 255, 255]
         }
 
-        return colours[colour]
+        try:
+            return colours[colour]
+        except KeyError:
+            raise LightStringException(f"Unknown colour '{colour}'")
+
+
+class LightStringException(Exception):
+    """Custom exception."""
+
+
+class FakePixel(list):
+    """Fake NeoPixels for testing."""
+
+    def __init__(self, length):  # pylint: disable=W0231
+        """Constructor."""
+        self.length = length
+        for i in range(self.length):  # pylint: disable=W0612
+            self.append((0, 0, 0))
+        self.fill = MagicMock()
