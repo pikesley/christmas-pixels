@@ -8,9 +8,4 @@ build:
 		--tag ${ID} .
 
 run:
-	docker run \
-	--volume $(shell pwd)/${PROJECT}:/opt/${PROJECT} \
-	--interactive \
-	--tty \
-	${ID}:latest \
-	bash
+	docker-compose exec xmas bash
