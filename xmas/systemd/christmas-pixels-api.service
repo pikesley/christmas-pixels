@@ -1,0 +1,17 @@
+[Unit]
+Description=Christmas Pixels API Server
+After=christmas-pixels-celery
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/xmas
+ExecStart=/bin/bash -lc 'make run-api'
+Restart=always
+KillMode=mixed
+TimeoutStopSec=5
+StandardInput=null
+StandardOutput=append:/var/log/christmas-pixels-api-server.log
+StandardError=append:/var/log/christmas-pixels-api-server.err
+
+[Install]
+WantedBy=multi-user.target

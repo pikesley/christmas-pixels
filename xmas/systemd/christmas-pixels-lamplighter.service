@@ -1,0 +1,17 @@
+[Unit]
+Description=Christmas Lights Activator
+After=christmas-pixels-api
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/xmas
+ExecStart=/bin/bash -lc 'make run-lamplighter'
+Restart=always
+KillMode=mixed
+TimeoutStopSec=5
+StandardInput=null
+StandardOutput=append:/var/log/christmas-pixels-lamplighter.log
+StandardError=append:/var/log/christmas-pixels-lamplighter.err
+
+[Install]
+WantedBy=multi-user.target
