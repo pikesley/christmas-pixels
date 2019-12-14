@@ -1,0 +1,17 @@
+[Unit]
+Description=Christmas Lights Celery Worker
+After=redis
+
+[Service]
+User=root
+WorkingDirectory=/home/pi/xmas
+ExecStart=/bin/bash -lc 'make run-celery'
+Restart=always
+KillMode=mixed
+TimeoutStopSec=5
+StandardInput=null
+StandardOutput=append:/var/log/christmas-pixels-celery-worker.log
+StandardError=append:/var/log/christmas-pixels-celery-worker.err
+
+[Install]
+WantedBy=multi-user.target
