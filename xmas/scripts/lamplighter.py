@@ -12,12 +12,12 @@ LOCK = threading.Lock()
 
 
 def dot(colour, interval):
-    """Continually light a randomly-chosen pixels with a weighted interval."""
+    """Continually light a randomly-chosen pixel with a weighted interval."""
     while True:
         index = random.randint(0, COUNT - 1)
-        payload = json.dumps({'colour': colour, 'index': index})
+        payload = json.dumps({'colour': colour})
         requests.post(
-            f'http://{LIGHTSHOST}:5000/lights/single', data=payload)
+            f'http://{LIGHTSHOST}:5000/lights/single/{index}', data=payload)
         time.sleep(random.random() * interval)
 
 
@@ -25,7 +25,7 @@ DOTTERS = {
     'green': 1,
     'red':   2,
     'white': 10,
-    'off':   5
+    'black':   5
 }
 
 if __name__ == '__main__':
