@@ -1,5 +1,7 @@
 adafruit-circuitpython-neopixel
+celery
 coverage
+email-validator  # ffs
 fastapi
 mock
 pylama
@@ -7,6 +9,10 @@ pylama-pylint
 pytest
 pytest-cov
 pytest-random-order
+pyyaml
+redis
 requests
 starlette==0.12.9
 uvicorn
+
+ipdb
