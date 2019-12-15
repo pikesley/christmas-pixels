@@ -11,9 +11,6 @@ test:
 test-no-cov:
 	python -m pytest --random-order -vv --exitfirst
 
-test-no-cov:
-	python -m pytest --random-order -vv --exitfirst
-
 install:
 	python -m pip install -r requirements.txt
 
