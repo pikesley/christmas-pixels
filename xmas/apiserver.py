@@ -15,6 +15,8 @@ async def set_all(payload: Colour):
     colour = payload.colour
 
     if colour in CONF['colours']:
+
+        # send the job off to the queue
         light_all.delay(colour)
         return {"colour": colour}
 
@@ -37,6 +39,8 @@ async def set_one(payload: Colour, index: int):
         errors.append(f"Unknown colour '{colour}'")
 
     if not errors:
+
+        # send the job off to the queue
         light_one.delay(index, colour)
         return {"index": index, "colour": colour}
 
