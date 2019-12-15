@@ -14,5 +14,3 @@ redis
 requests
 starlette==0.12.9
 uvicorn
-
-ipdb
