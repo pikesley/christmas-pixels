@@ -6,4 +6,5 @@ install:
   - cd xmas && make install
 # command to run tests
 script:
-  - cd xmas && make
+  - make travis
+
