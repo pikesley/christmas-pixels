@@ -1,10 +1,15 @@
 all: style test clean
 
+travis: style test-no-cov
+
 style:
 	python -m pylama
 
 test:
 	python -m pytest --random-order --cov -vv -s --exitfirst
+
+test-no-cov:
+	python -m pytest --random-order -vv --exitfirst
 
 install:
 	python -m pip install -r requirements.txt

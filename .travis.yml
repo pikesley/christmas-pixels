@@ -6,4 +6,6 @@ install:
   - cd xmas && make install
 # command to run tests
 script:
-  - make
+  - make travis
+after_success:
+  - codecov # submit coverage
