@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/pikesley/christmas-pixels.svg?branch=master)](https://travis-ci.org/pikesley/christmas-pixels)
+
 # Christmas Pixels
 
 I got [some of these NeoPixels](https://www.ebay.co.uk/itm/5V-50pcs-WS2811-Diffused-Digital-RGB-LED-Pixel-String-Module-Lights-Waterproof/372795105807) and thought it might be nice to make them into Christmas lights using a[Pi Zero](https://www.raspberrypi.org/products/raspberry-pi-zero/), so here we are
