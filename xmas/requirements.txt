@@ -1,6 +1,5 @@
 adafruit-circuitpython-neopixel
 celery
-codecov
 coverage
 email-validator  # ffs
 fastapi
