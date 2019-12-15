@@ -10,11 +10,11 @@ I got [some of these NeoPixels](https://www.ebay.co.uk/itm/5V-50pcs-WS2811-Diffu
 
 I have the data line for the NeoPixels connected to [logical pin 18 (physical 12)](https://pinout.xyz/) on the Pi, but note that I had to connect this to the other end of the light string from where I connected the power, so I've effectively made a loop of lights. I couldn't get anything to work with the data at the same end, or with the power at the other end. Possibly I'm doing something boneheaded, but it's no big deal.
 
-Of more interest is the fact that these LEDs are GRB, not RGB. Once again,no big deal, but I'm led to understand that it's the luck of the draw which type you end up with.
+Of more interest is the fact that these LEDs are GRB, not RGB. Once again, no big deal, but I'm led to understand that it's the luck of the draw which type you end up with.
 
 ### Software
 
-I started with a bare-bones [NOOBS 3.2](https://www.raspberrypi.org/downloads/noobs/) install of [Raspbian Lite](https://www.raspberrypi.org/downloads/raspbian/), then:
+Start with a bare-bones [NOOBS 3.2](https://www.raspberrypi.org/downloads/noobs/) install of [Raspbian Lite](https://www.raspberrypi.org/downloads/raspbian/), then:
 
 #### Make Python 3 the default
 
@@ -57,8 +57,9 @@ cd xmas
 make
 ```
 
-And then you should probably reboot. Lights should start blinking when it comes back up, and it should be logging to `/var/log/lightsserver.*`
+And then you should probably reboot. Lights should start blinking when it comes back up, and it should be logging to `/var/log/christmas-pixels-*`
 
 ## API docs
 
 You should be able to see [Swagger](http://xmas.local:5000/docs) and [Redoc](http://xmas.local:5000/redoc) API docs, thanks to [FastAPI](https://fastapi.tiangolo.com/)'s superpowers
+
