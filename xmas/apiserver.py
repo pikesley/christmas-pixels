@@ -1,45 +1,48 @@
 from fastapi import FastAPI
 from fastapi import HTTPException
-from pydantic import BaseModel  # pylint: disable=E0611
 
-from lib.light_string import LightString
-from lib.light_string import LightStringException
-
-
-class Colour(BaseModel):
-    """Model for a basic colour."""
-
-    colour: str
+from lib.conf import CONF
+from models.colour import Colour
+from workers.light_worker import light_one, light_all
 
 
-class IndexedColour(BaseModel):
-    """Model for a colour with an index."""
-
-    index: int
-    colour: str
+APP = FastAPI()
 
 
-app = FastAPI()  # pylint: disable=C0103
-app.lights = LightString(50)
-
-
-@app.post('/lights/all')
+@APP.post('/lights/all')
 async def set_all(payload: Colour):
     """Set all the lights to one colour."""
-    try:
-        app.lights.light_all(payload.colour)
-    except LightStringException as exc:
-        raise HTTPException(status_code=422, detail=str(exc))
+    colour = payload.colour
 
-    return {"colour": payload.colour}
+    if colour in CONF['colours']:
+
+        # send the job off to the queue
+        light_all.delay(colour)
+        return {"colour": colour}
+
+    else:
+        message = f"Unknown colour '{colour}'"
+        raise HTTPException(status_code=422, detail=message)
 
 
-@app.post('/lights/single')
-async def set_one(payload: IndexedColour):
+@APP.post('/lights/single/{index}')
+async def set_one(payload: Colour, index: int):
     """Set a single light to a colour."""
-    try:
-        app.lights.light_one(payload.index, payload.colour)
-    except LightStringException as exc:
-        raise HTTPException(status_code=422, detail=str(exc))
+    colour = payload.colour
 
-    return {"index": payload.index, "colour": payload.colour}
+    errors = []
+
+    if not index < CONF['lights-count']:
+        errors.append(f"Invalid index {index}")
+
+    if colour not in CONF['colours']:
+        errors.append(f"Unknown colour '{colour}'")
+
+    if not errors:
+
+        # send the job off to the queue
+        light_one.delay(index, colour)
+        return {"index": index, "colour": colour}
+
+    else:
+        raise HTTPException(status_code=422, detail=', '.join(errors))

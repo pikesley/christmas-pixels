@@ -1,0 +1,24 @@
+default: install systemd-install
+
+install:
+	python -m pip install -r requirements.txt
+	sudo python -m pip install -r requirements-root.txt
+
+systemd-install:
+	sudo systemctl enable /home/pi/xmas/systemd/christmas-pixels-api.service
+	sudo systemctl enable /home/pi/xmas/systemd/christmas-pixels-celery.service
+	sudo systemctl enable /home/pi/xmas/systemd/christmas-pixels-lamplighter.service
+
+stop-services:
+	sudo service christmas-pixels-api stop
+	sudo service christmas-pixels-celery stop
+	sudo service christmas-pixels-lamplighter stop
+
+run-api:
+	uvicorn apiserver:APP --host 0.0.0.0 --port 5000
+
+run-celery:
+	celery worker -A workers.light_worker --loglevel INFO
+
+run-lamplighter:
+	python scripts/lamplighter.py

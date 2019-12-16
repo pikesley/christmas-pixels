@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  redis:
+    image: redis
+
+  xmas:
+    image: pikesley/xmas
+    volumes:
+    - ./xmas:/opt/xmas
+    tty: true
+    command: tail -f /dev/null
