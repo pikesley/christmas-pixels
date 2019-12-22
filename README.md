@@ -2,6 +2,8 @@
 
 # Christmas Pixels
 
+[See the lights in action](https://s5.gifyu.com/images/20191222_191207.gif)
+
 I got [some of these NeoPixels](https://www.ebay.co.uk/itm/5V-50pcs-WS2811-Diffused-Digital-RGB-LED-Pixel-String-Module-Lights-Waterproof/372795105807) and thought it might be fun to make them into Christmas lights using a [Pi Zero](https://www.raspberrypi.org/products/raspberry-pi-zero/). The first iteration wasn't over-engineered enough, so this now features a [Redis](https://redis.io/)-backed [Celery job queue](http://www.celeryproject.org/)
 
 ## On the Pi
